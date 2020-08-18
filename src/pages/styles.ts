@@ -44,15 +44,23 @@ export const InputContainer = styled.div`
   align-items: center;
 
   width: 100%;
-  margin: 20px 100px;
+  margin: 20px 0;
   padding: 16px;
 
-  /* svg {
-    width: 20px;
-    height: 20px;
+  & > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
+    border: 0;
 
-    margin-right: 10px;
-  } */
+    svg {
+      color: #666360;
+
+      width: 20px;
+      height: 20px;
+    }
+  }
 
   input {
     flex: 1;
@@ -67,7 +75,54 @@ export const InputContainer = styled.div`
   }
 `;
 
-export const TodoList = styled.div``;
+export const TodoListContainer = styled.section`
+  background: #f0f0f2;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  flex-direction: column;
+`;
+
+export const TodoList = styled.div`
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    border: 0;
+  }
+
+  svg {
+    color: #666360;
+
+    width: 20px;
+    height: 20px;
+  }
+
+  label {
+    background: transparent;
+    border: 0;
+    color: #666360;
+    font-size: 20px;
+    clear: left;
+  }
+
+  input {
+    flex: 1;
+    background: transparent;
+    border: 0;
+    color: #666360;
+    font-size: 20px;
+  }
+`;
 
 export const Footer = styled.footer`
   padding: 32px 0;
