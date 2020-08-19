@@ -1,4 +1,11 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+import ScrollArea from 'react-scrollbar';
+
+interface ITodoListProps {
+  isComplete: boolean;
+  index: number;
+}
 
 export const Container = styled.div``;
 
@@ -75,16 +82,14 @@ export const InputContainer = styled.div`
   }
 `;
 
-export const TodoListContainer = styled.section`
+export const TodoListContainer = styled(ScrollArea)`
   background: #f0f0f2;
-  display: flex;
   width: 100%;
   height: 100%;
   border-radius: 16px;
-  flex-direction: column;
 `;
 
-export const TodoList = styled.div`
+export const TodoList = styled.div<ITodoListProps>`
   display: flex;
   align-items: center;
 
@@ -101,7 +106,14 @@ export const TodoList = styled.div`
   }
 
   svg {
-    color: #666360;
+    ${(props) =>
+      props.isComplete
+        ? css`
+            color: #4bb543;
+          `
+        : css`
+            color: #666360;
+          `}
 
     width: 20px;
     height: 20px;
