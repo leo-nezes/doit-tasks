@@ -1,4 +1,4 @@
-import React, { useRef, useState, FormEvent } from 'react';
+import React, { useRef, useState } from 'react';
 import { FiCircle, FiPlusCircle, FiCheckCircle } from 'react-icons/fi';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -16,43 +16,52 @@ import {
 
 interface TodoProps {
   id: string;
+  prevValue: string;
   value: string;
   complete: boolean;
 }
 
 const Dashboard: React.FC = () => {
-  const [todos, setTodos] = useState<TodoProps[]>([]);
+  const [todos, setTodos] = useState<TodoProps[]>([
+    { id: 'string', prevValue: '', value: 'Teste', complete: false },
+  ]);
   const [isComplete, setIsComplete] = useState(false);
   const [show, setShow] = useState(false);
 
   const inputAddTodo = useRef<HTMLInputElement>(null);
-  const inputRefs = useRef<HTMLInputElement[]>([]);
-
-  const test = (e: FormEvent<HTMLInputElement>): void => {
-    console.log(e.target);
-  };
+  const labelRefs = useRef<HTMLLabelElement[]>([]);
 
   const handleEditing = (index: number): void => {
-    const {
-      defaultValue,
-      innerHTML,
-      innerText,
-      textContent,
-    } = inputRefs.current[index];
+    const oldTodosWithUpdatedValue = [...todos];
 
-    console.log(defaultValue);
-    console.log(innerHTML);
-    console.log(innerText);
-    console.log(textContent);
+    const { innerText } = labelRefs.current[index];
+
+    const todo = oldTodosWithUpdatedValue.find(
+      (_, indexTodo) => indexTodo === index,
+    );
+
+    if (!todo) throw new Error('Error to edit todo item. Try again, later.');
+
+    const newTodo = {
+      id: todo.id,
+      prevValue: todo.value,
+      value: innerText,
+      complete: todo.complete,
+    };
+
+    oldTodosWithUpdatedValue[index] = newTodo;
+
+    setTodos([...oldTodosWithUpdatedValue]);
   };
 
   const handleChangeComplete = (todo: TodoProps): void => {
-    const { id, value, complete } = todo;
+    const { id, prevValue, value, complete } = todo;
 
     setIsComplete(!todo.complete);
 
     const newTodo = {
       id,
+      prevValue,
       value,
       complete: !complete,
     };
@@ -75,6 +84,7 @@ const Dashboard: React.FC = () => {
 
     const newTodo = {
       id: uuidv4(),
+      prevValue: '',
       value,
       complete: false,
     };
@@ -82,7 +92,7 @@ const Dashboard: React.FC = () => {
     setTodos([...oldTodos, newTodo]);
 
     inputAddTodo.current.value = '';
-    setShow(true);
+    setShow(!show);
   };
 
   return (
@@ -122,15 +132,17 @@ const Dashboard: React.FC = () => {
                     {todo.complete ? <FiCheckCircle /> : <FiCircle />}
                   </button>
 
-                  <input
+                  <label
                     contentEditable="true"
+                    suppressContentEditableWarning={true}
                     ref={(el) =>
-                      (inputRefs.current[index] = el as HTMLInputElement)
+                      (labelRefs.current[index] = el as HTMLLabelElement)
                     }
                     defaultValue={todo.value}
-                    onChange={(e) => test(e)}
                     onBlur={() => handleEditing(index)}
-                  />
+                  >
+                    {todo.value}
+                  </label>
                 </TodoList>
               ))}
             </TodoListContainer>

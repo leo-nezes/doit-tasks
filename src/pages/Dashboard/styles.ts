@@ -120,17 +120,12 @@ export const TodoList = styled.div<ITodoListProps>`
   }
 
   label {
-    background: transparent;
-    border: 0;
-    color: #666360;
-    font-size: 20px;
-    clear: left;
-  }
-
-  input {
+    white-space: nowrap;
+    overflow: hidden;
     flex: 1;
+    max-width: 400px;
+
     background: transparent;
-    border: 0;
     color: #666360;
     font-size: 20px;
   }
