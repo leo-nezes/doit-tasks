@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { transparentize } from 'polished';
 
 import ScrollArea from 'react-scrollbar';
 
@@ -22,8 +23,6 @@ export const MainContainer = styled.div`
 `;
 
 export const Main = styled.main`
-  /* border: 2px solid yellow; */
-
   background: #fff;
   display: flex;
   flex-direction: column;
@@ -56,16 +55,13 @@ export const InputContainer = styled.div`
 
   & > button {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 10px;
     border: 0;
 
     svg {
       color: #666360;
 
-      width: 20px;
-      height: 20px;
+      width: 25px;
+      height: 25px;
     }
   }
 
@@ -75,6 +71,8 @@ export const InputContainer = styled.div`
     border: 0;
     color: #666360;
     font-size: 20px;
+
+    margin: 0 16px;
 
     &::placeholder {
       color: #666360;
@@ -95,7 +93,6 @@ export const TodoList = styled.div<ITodoListProps>`
 
   width: 100%;
   height: 50px;
-  padding: 10px;
 
   button {
     display: flex;
@@ -103,6 +100,7 @@ export const TodoList = styled.div<ITodoListProps>`
     align-items: center;
     margin-right: 10px;
     border: 0;
+    margin: 0 16px;
   }
 
   svg {
@@ -115,8 +113,8 @@ export const TodoList = styled.div<ITodoListProps>`
             color: #666360;
           `}
 
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
   }
 
   label {
@@ -128,6 +126,20 @@ export const TodoList = styled.div<ITodoListProps>`
     background: transparent;
     color: #666360;
     font-size: 20px;
+
+    ${(props) =>
+      props.isComplete &&
+      css`
+        color: ${transparentize(0.5, '#666360')};
+        background: ${transparentize(0.5, '#f0f0f2')};
+      `}
+  }
+
+  button:last-child > svg {
+    color: #fa4353;
+
+    width: 25px;
+    height: 25px;
   }
 `;
 

@@ -1,5 +1,11 @@
 import React, { useRef, useState } from 'react';
-import { FiCircle, FiPlusCircle, FiCheckCircle } from 'react-icons/fi';
+import {
+  FiArrowDownCircle,
+  FiCircle,
+  FiPlusCircle,
+  FiCheckCircle,
+  FiMinusCircle,
+} from 'react-icons/fi';
 import { v4 as uuidv4 } from 'uuid';
 
 import {
@@ -24,12 +30,77 @@ interface TodoProps {
 const Dashboard: React.FC = () => {
   const [todos, setTodos] = useState<TodoProps[]>([
     { id: 'string', prevValue: '', value: 'Teste', complete: false },
+    { id: 'string', prevValue: '', value: 'Teste', complete: false },
+    { id: 'string', prevValue: '', value: 'Teste', complete: false },
+    { id: 'string', prevValue: '', value: 'Teste', complete: false },
+    { id: 'string', prevValue: '', value: 'Teste', complete: false },
+    { id: 'string', prevValue: '', value: 'Teste', complete: false },
+    { id: 'string', prevValue: '', value: 'Teste', complete: false },
+    { id: 'string', prevValue: '', value: 'Teste', complete: false },
+    { id: 'string', prevValue: '', value: 'Teste', complete: false },
+    { id: 'string', prevValue: '', value: 'Teste', complete: false },
   ]);
   const [isComplete, setIsComplete] = useState(false);
-  const [show, setShow] = useState(false);
 
   const inputAddTodo = useRef<HTMLInputElement>(null);
   const labelRefs = useRef<HTMLLabelElement[]>([]);
+
+  const handleChangeComplete = (todo: TodoProps): void => {
+    const { id, prevValue, value, complete } = todo;
+
+    setIsComplete(!todo.complete);
+
+    const newTodo = {
+      id,
+      prevValue,
+      value,
+      complete: !complete,
+    };
+
+    const newTodos = todos.map((todoMap) => {
+      const result = todoMap.id === id ? newTodo : todoMap;
+
+      return result;
+    });
+
+    setTodos([...newTodos]);
+  };
+
+  const handleChangeCompleteAll = (): void => {
+    const newTodosWithCompleteChange = todos.map((todo) => {
+      const { id, prevValue, value, complete } = todo;
+
+      if (todo.complete) return todo;
+
+      return {
+        id,
+        prevValue,
+        value,
+        complete: !complete,
+      };
+    });
+
+    setTodos([...newTodosWithCompleteChange]);
+  };
+
+  const handleAddTodo = (): void => {
+    const oldTodos = [...todos];
+
+    if (!inputAddTodo.current) return;
+
+    const { value } = inputAddTodo.current;
+
+    const newTodo = {
+      id: uuidv4(),
+      prevValue: '',
+      value,
+      complete: false,
+    };
+
+    setTodos([...oldTodos, newTodo]);
+
+    inputAddTodo.current.value = '';
+  };
 
   const handleEditing = (index: number): void => {
     const oldTodosWithUpdatedValue = [...todos];
@@ -54,45 +125,10 @@ const Dashboard: React.FC = () => {
     setTodos([...oldTodosWithUpdatedValue]);
   };
 
-  const handleChangeComplete = (todo: TodoProps): void => {
-    const { id, prevValue, value, complete } = todo;
-
-    setIsComplete(!todo.complete);
-
-    const newTodo = {
-      id,
-      prevValue,
-      value,
-      complete: !complete,
-    };
-
-    const newTodos = todos.map((todoMap) => {
-      const result = todoMap.id === id ? newTodo : todoMap;
-
-      return result;
-    });
+  const handleDeleteTodo = (todo: TodoProps): void => {
+    const newTodos = todos.filter((todoFilter) => todoFilter.id !== todo.id);
 
     setTodos([...newTodos]);
-  };
-
-  const handleAddTodo = (): void => {
-    const oldTodos = [...todos];
-
-    if (!inputAddTodo.current) return;
-
-    const { value } = inputAddTodo.current;
-
-    const newTodo = {
-      id: uuidv4(),
-      prevValue: '',
-      value,
-      complete: false,
-    };
-
-    setTodos([...oldTodos, newTodo]);
-
-    inputAddTodo.current.value = '';
-    setShow(!show);
   };
 
   return (
@@ -106,6 +142,10 @@ const Dashboard: React.FC = () => {
           <MainTitle>todo list</MainTitle>
 
           <InputContainer>
+            <button onClick={handleChangeCompleteAll} type="button">
+              <FiArrowDownCircle />
+            </button>
+
             <input
               ref={inputAddTodo}
               name="add"
@@ -143,6 +183,10 @@ const Dashboard: React.FC = () => {
                   >
                     {todo.value}
                   </label>
+
+                  <button onClick={() => handleDeleteTodo(todo)} type="button">
+                    <FiMinusCircle />
+                  </button>
                 </TodoList>
               ))}
             </TodoListContainer>
