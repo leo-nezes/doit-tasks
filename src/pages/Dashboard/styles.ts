@@ -8,6 +8,10 @@ interface ITodoListProps {
   index: number;
 }
 
+interface IInputContainerProps {
+  isErrored: boolean;
+}
+
 export const Container = styled.div``;
 
 export const Header = styled.header`
@@ -42,7 +46,7 @@ export const MainTitle = styled.h1`
   padding: 10px 16px;
 `;
 
-export const InputContainer = styled.div`
+export const InputContainer = styled.div<IInputContainerProps>`
   background: #f0f0f2;
   border-radius: 16px;
   display: flex;
@@ -50,15 +54,31 @@ export const InputContainer = styled.div`
   align-items: center;
 
   width: 100%;
-  margin: 20px 0;
+  margin-bottom: 10px;
   padding: 16px;
+
+  ${(props) =>
+    props.isErrored
+      ? css`
+          border: 1px solid #fa4353;
+        `
+      : css`
+          border: 0;
+        `}
 
   & > button {
     display: flex;
     border: 0;
 
     svg {
-      color: #666360;
+      ${(props) =>
+        props.isErrored
+          ? css`
+              color: #fa4353;
+            `
+          : css`
+              color: #666360;
+            `}
 
       width: 25px;
       height: 25px;
@@ -69,14 +89,21 @@ export const InputContainer = styled.div`
     flex: 1;
     background: transparent;
     border: 0;
-    color: #666360;
     font-size: 20px;
 
     margin: 0 16px;
 
-    &::placeholder {
-      color: #666360;
-    }
+    ${(props) =>
+      props.isErrored
+        ? css`
+            &::placeholder {
+              color: #fa4353;
+            }
+            /* color: #fa4353; */
+          `
+        : css`
+            color: #666360;
+          `}
   }
 `;
 
@@ -146,4 +173,9 @@ export const TodoList = styled.div<ITodoListProps>`
 export const Footer = styled.footer`
   padding: 32px 0;
   background: #a6a6a6;
+`;
+
+export const TodoError = styled.label`
+  margin: -10px 0 10px -110px;
+  color: #fa4353;
 `;
