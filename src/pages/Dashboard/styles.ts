@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { transparentize } from 'polished';
+import { shade, transparentize } from 'polished';
 
 import ScrollArea from 'react-scrollbar';
 
@@ -10,31 +10,57 @@ interface ITodoListProps {
 
 interface IInputContainerProps {
   isErrored: boolean;
+  isFocused: boolean;
 }
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  height: 100vh;
 
-export const Header = styled.header`
-  padding: 32px 0;
-  background: #a6a6a6;
+  display: flex;
+  padding: 16px;
 `;
 
-export const MainContainer = styled.div`
+export const InformationContainer = styled.aside`
+  /* border: 2px solid red; */
+
+  width: 250px;
+  height: 95vh;
+  border-radius: 5px;
+  background: #fff;
+`;
+
+export const MainContainer = styled.section`
+  flex: 1;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  padding: 16px;
 
   background: #f0f0f2;
 `;
 
+export const Header = styled.header`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  height: 80px;
+
+  color: #666360;
+  font-size: 35px;
+`;
+
 export const Main = styled.main`
-  background: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 503px;
-  width: 503px;
+  max-width: 828px;
+  margin: 16px 0;
   padding: 16px 16px;
 
+  background: #fff;
   border-radius: 20px;
   box-shadow: 0px 11px 20px 0px rgba(0, 0, 0, 0.5);
 `;
@@ -66,11 +92,22 @@ export const InputContainer = styled.div<IInputContainerProps>`
           border: 0;
         `}
 
-  & > button {
+  ${(props) =>
+    props.isFocused &&
+    css`
+      border: 0;
+    `}
+
+  button {
     display: flex;
     border: 0;
 
     svg {
+      width: 25px;
+      height: 25px;
+
+      transition: color 1s;
+
       ${(props) =>
         props.isErrored
           ? css`
@@ -79,9 +116,17 @@ export const InputContainer = styled.div<IInputContainerProps>`
           : css`
               color: #666360;
             `}
+    }
 
-      width: 25px;
-      height: 25px;
+    svg:hover {
+      ${(props) =>
+        props.isErrored
+          ? css`
+              color: ${shade(0.5, '#fa4353')};
+            `
+          : css`
+              color: ${shade(0.5, '#666360')};
+            `}
     }
   }
 
@@ -92,29 +137,42 @@ export const InputContainer = styled.div<IInputContainerProps>`
     font-size: 20px;
 
     margin: 0 16px;
+    color: #666360;
 
     ${(props) =>
-      props.isErrored
-        ? css`
-            &::placeholder {
-              color: #fa4353;
-            }
-            /* color: #fa4353; */
-          `
-        : css`
-            color: #666360;
-          `}
+      props.isErrored &&
+      css`
+        &::placeholder {
+          color: #fa4353;
+        }
+      `}
+
+    ${(props) =>
+      props.isFocused &&
+      css`
+        &::placeholder {
+          color: #666360;
+        }
+      `}
   }
+`;
+
+export const TodoError = styled.label`
+  margin: -10px 0 10px -560px;
+  color: #fa4353;
 `;
 
 export const TodoListContainer = styled(ScrollArea)`
   background: #f0f0f2;
+
   width: 100%;
   height: 100%;
   border-radius: 16px;
 `;
 
 export const TodoList = styled.div<ITodoListProps>`
+  /* border: 2px solid green; */
+
   display: flex;
   align-items: center;
 
@@ -148,7 +206,7 @@ export const TodoList = styled.div<ITodoListProps>`
     white-space: nowrap;
     overflow: hidden;
     flex: 1;
-    max-width: 400px;
+    /* max-width: 400px; */
 
     background: transparent;
     color: #666360;
@@ -171,11 +229,16 @@ export const TodoList = styled.div<ITodoListProps>`
 `;
 
 export const Footer = styled.footer`
-  padding: 32px 0;
-  background: #a6a6a6;
-`;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
 
-export const TodoError = styled.label`
-  margin: -10px 0 10px -110px;
-  color: #fa4353;
+  color: #666360;
+  font-size: 14px;
+
+  span > a {
+    color: #666360;
+    text-decoration: none;
+  }
 `;

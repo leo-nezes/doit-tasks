@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import {
   FiArrowDownCircle,
   FiCircle,
+  FiAlertCircle,
   FiPlusCircle,
   FiCheckCircle,
   FiMinusCircle,
@@ -11,6 +12,7 @@ import {
 
 import {
   Container,
+  InformationContainer,
   Header,
   MainContainer,
   Main,
@@ -31,25 +33,114 @@ interface TodoProps {
 
 const Dashboard: React.FC = () => {
   const [todos, setTodos] = useState<TodoProps[]>([
-    { id: 'string-Teste 1', prevValue: '', value: 'Teste 1', complete: false },
-    { id: 'string-Teste 2', prevValue: '', value: 'Teste 2', complete: false },
-    { id: 'string-Teste 3', prevValue: '', value: 'Teste 3', complete: false },
-    { id: 'string-Teste 4', prevValue: '', value: 'Teste 4', complete: false },
-    { id: 'string-Teste 5', prevValue: '', value: 'Teste 5', complete: false },
-    { id: 'string-Teste 6', prevValue: '', value: 'Teste 6', complete: false },
-    { id: 'string-Teste 7', prevValue: '', value: 'Teste 7', complete: false },
-    { id: 'string-Teste 8', prevValue: '', value: 'Teste 8', complete: false },
-    { id: 'string-Teste 9', prevValue: '', value: 'Teste 9', complete: false },
     {
-      id: 'string-Teste 10',
+      id: 'Teste 1',
       prevValue: '',
-      value: 'Teste 10',
+      value:
+        'Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Leonardo',
+      complete: false,
+    },
+    {
+      id: 'Teste 2',
+      prevValue: '',
+      value:
+        'Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Leonardo',
+      complete: false,
+    },
+    {
+      id: 'Teste 3',
+      prevValue: '',
+      value:
+        'Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Leonardo',
+      complete: false,
+    },
+    {
+      id: 'Teste 4',
+      prevValue: '',
+      value:
+        'Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Leonardo',
+      complete: false,
+    },
+    {
+      id: 'Teste 5',
+      prevValue: '',
+      value:
+        'Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Leonardo',
+      complete: false,
+    },
+    {
+      id: 'Teste 6',
+      prevValue: '',
+      value:
+        'Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Leonardo',
+      complete: false,
+    },
+    {
+      id: 'Teste 7',
+      prevValue: '',
+      value:
+        'Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Leonardo',
+      complete: false,
+    },
+    {
+      id: 'Teste 8',
+      prevValue: '',
+      value:
+        'Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Leonardo',
+      complete: false,
+    },
+    {
+      id: 'Teste 9',
+      prevValue: '',
+      value:
+        'Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Leonardo',
+      complete: false,
+    },
+    {
+      id: 'Teste 10',
+      prevValue: '',
+      value:
+        'Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Leonardo',
+      complete: false,
+    },
+    {
+      id: 'Teste 11',
+      prevValue: '',
+      value:
+        'Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Leonardo',
+      complete: false,
+    },
+    {
+      id: 'Teste 12',
+      prevValue: '',
+      value:
+        'Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Leonardo',
+      complete: false,
+    },
+    {
+      id: 'Teste 13',
+      prevValue: '',
+      value:
+        'Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Leonardo',
+      complete: false,
+    },
+    {
+      id: 'Teste 14',
+      prevValue: '',
+      value:
+        'Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Leonardo',
+      complete: false,
+    },
+    {
+      id: 'Teste 15',
+      prevValue: '',
+      value:
+        'Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Leonardo',
       complete: false,
     },
   ]);
   const [selectAll, setSelectAll] = useState(true);
   const [isFocused, setIsFocused] = useState(false);
-  const [isFilled, setIsFilled] = useState(false);
 
   const [addTodoError, setAddTodoError] = useState({
     isError: false,
@@ -65,8 +156,6 @@ const Dashboard: React.FC = () => {
 
   const handleInputBlur = useCallback(() => {
     setIsFocused(false);
-
-    setIsFilled(!!inputAddTodo.current?.value);
   }, []);
 
   const addErrorMessage = useCallback((locale: string, message: string) => {
@@ -74,24 +163,27 @@ const Dashboard: React.FC = () => {
     setAddTodoError(errorParam);
   }, []);
 
-  const handleChangeComplete = useCallback((todo: TodoProps) => {
-    const { id, prevValue, value, complete } = todo;
+  const handleChangeComplete = useCallback(
+    (todo: TodoProps) => {
+      const { id, prevValue, value, complete } = todo;
 
-    const newTodo = {
-      id,
-      prevValue,
-      value,
-      complete: !complete,
-    };
+      const newTodo = {
+        id,
+        prevValue,
+        value,
+        complete: !complete,
+      };
 
-    const newTodos = todos.map((todoMap) => {
-      const result = todoMap.id === id ? newTodo : todoMap;
+      const newTodos = todos.map((todoMap) => {
+        const result = todoMap.id === id ? newTodo : todoMap;
 
-      return result;
-    });
+        return result;
+      });
 
-    setTodos([...newTodos]);
-  }, []);
+      setTodos([...newTodos]);
+    },
+    [todos],
+  );
 
   const handleCompleteAll = useCallback(() => {
     const newTodosWithCompleteChange = todos.map((todo) => {
@@ -107,40 +199,49 @@ const Dashboard: React.FC = () => {
 
     setSelectAll(!selectAll);
     setTodos([...newTodosWithCompleteChange]);
-  }, []);
+  }, [selectAll, todos]);
 
   const handleAddTodo = useCallback(
     async (data: RefObject<HTMLInputElement>) => {
       try {
+        const formattedData = { addTodo: data.current?.value };
+
         const schema = Yup.object().shape({
-          addTodo: Yup.string().required(
-            'Preenchimento obrigatório no campo acima.',
-          ),
+          addTodo: Yup.string().required('Preenchimento obrigatório.'),
         });
 
-        await schema.validate(data, {
+        await schema.validate(formattedData, {
           abortEarly: false,
         });
 
         const oldTodos = [...todos];
 
-        if (!inputAddTodo.current) return;
+        if (!formattedData.addTodo)
+          throw new Error('Erro ao encontrar valor do input addTodo');
 
-        const { value } = inputAddTodo.current;
+        const { addTodo } = formattedData;
 
         const newTodo = {
           id: uuidv4(),
           prevValue: '',
-          value,
+          value: addTodo,
           complete: false,
         };
 
         setTodos([...oldTodos, newTodo]);
 
+        if (!inputAddTodo.current)
+          throw new Error('Erro ao encontrar referência do input addTodo');
+
         inputAddTodo.current.value = '';
+
+        setAddTodoError({
+          isError: false,
+          locale: '',
+          message: '',
+        });
       } catch (errors) {
         if (errors instanceof Yup.ValidationError) {
-          console.log(errors);
           errors.inner.forEach((err) => {
             addErrorMessage(err.path, err.message);
           });
@@ -150,31 +251,39 @@ const Dashboard: React.FC = () => {
         console.log(errors);
       }
     },
-    [todos],
+    [todos, addErrorMessage],
   );
 
   const handleEditTodo = useCallback(
-    (index: number) => {
-      const oldTodosWithUpdatedValue = [...todos];
+    (label: HTMLLabelElement, index: number) => {
+      const formattedLabelData = { labelValue: label.innerText };
 
-      const { innerText } = labelRefs.current[index];
+      if (!formattedLabelData.labelValue) {
+        const todoToBeRemoved = todos[index];
 
-      const todo = oldTodosWithUpdatedValue.find(
-        (_, indexTodo) => indexTodo === index,
-      );
+        const newTodos = todos.filter((todo) => todo.id !== todoToBeRemoved.id);
 
-      if (!todo) throw new Error('Error to edit todo item. Try again, later.');
+        setTodos([...newTodos]);
+
+        return;
+      }
+
+      const todosUpdated = [...todos];
+      const findedTodo = todosUpdated[index];
+
+      if (!findedTodo)
+        throw new Error('Error to edit todo item. Try again, later.');
 
       const newTodo = {
-        id: todo.id,
-        prevValue: todo.value,
-        value: innerText,
-        complete: todo.complete,
+        id: findedTodo.id,
+        prevValue: findedTodo.value,
+        value: formattedLabelData.labelValue,
+        complete: findedTodo.complete,
       };
 
-      oldTodosWithUpdatedValue[index] = newTodo;
+      todosUpdated[index] = newTodo;
 
-      setTodos([...oldTodosWithUpdatedValue]);
+      setTodos([...todosUpdated]);
     },
     [todos],
   );
@@ -190,18 +299,32 @@ const Dashboard: React.FC = () => {
 
   return (
     <Container>
-      <Header>
-        <h1>Todo App</h1>
-      </Header>
+      <InformationContainer>
+        Teste
+        {/* <div style={{ border: '2px solid green', height: '50vh' }}>Teste 2</div> */}
+      </InformationContainer>
 
       <MainContainer>
-        <Main>
-          <MainTitle>todo list</MainTitle>
+        <Header>
+          <h1>TODO App</h1>
+        </Header>
 
-          <InputContainer isErrored={addTodoError.isError}>
-            <button onClick={handleCompleteAll} type="button">
-              <FiArrowDownCircle />
-            </button>
+        <Main>
+          {/* <MainTitle>todo list</MainTitle> */}
+
+          <InputContainer
+            isErrored={addTodoError.isError}
+            isFocused={isFocused}
+          >
+            {addTodoError.isError ? (
+              <button type="button">
+                <FiAlertCircle />
+              </button>
+            ) : (
+              <button onClick={handleCompleteAll} type="button">
+                <FiArrowDownCircle />
+              </button>
+            )}
 
             <input
               ref={inputAddTodo}
@@ -241,8 +364,9 @@ const Dashboard: React.FC = () => {
                     ref={(el) =>
                       (labelRefs.current[index] = el as HTMLLabelElement)
                     }
-                    defaultValue={todo.value}
-                    onBlur={() => handleEditTodo(index)}
+                    onBlur={() =>
+                      handleEditTodo(labelRefs.current[index], index)
+                    }
                   >
                     {todo.value}
                   </label>
@@ -255,9 +379,14 @@ const Dashboard: React.FC = () => {
             </TodoListContainer>
           )}
         </Main>
-      </MainContainer>
 
-      <Footer> Teste </Footer>
+        <Footer>
+          <span>
+            Created by{' '}
+            <a href="https://github.com/leo-nezes/todo-app">leo.nezes</a>
+          </span>
+        </Footer>
+      </MainContainer>
     </Container>
   );
 };
