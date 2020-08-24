@@ -1,4 +1,10 @@
-import React, { useRef, useState, useCallback, RefObject } from 'react';
+import React, {
+  useRef,
+  useState,
+  useCallback,
+  useEffect,
+  RefObject,
+} from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import * as Yup from 'yup';
 import {
@@ -16,7 +22,6 @@ import {
   Header,
   MainContainer,
   Main,
-  MainTitle,
   TodoListContainer,
   TodoList,
   InputContainer,
@@ -32,113 +37,7 @@ interface TodoProps {
 }
 
 const Dashboard: React.FC = () => {
-  const [todos, setTodos] = useState<TodoProps[]>([
-    {
-      id: 'Teste 1',
-      prevValue: '',
-      value:
-        'Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Teste 1 Leonardo',
-      complete: false,
-    },
-    {
-      id: 'Teste 2',
-      prevValue: '',
-      value:
-        'Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Teste 2 Leonardo',
-      complete: false,
-    },
-    {
-      id: 'Teste 3',
-      prevValue: '',
-      value:
-        'Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Teste 3 Leonardo',
-      complete: false,
-    },
-    {
-      id: 'Teste 4',
-      prevValue: '',
-      value:
-        'Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Teste 4 Leonardo',
-      complete: false,
-    },
-    {
-      id: 'Teste 5',
-      prevValue: '',
-      value:
-        'Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Teste 5 Leonardo',
-      complete: false,
-    },
-    {
-      id: 'Teste 6',
-      prevValue: '',
-      value:
-        'Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Teste 6 Leonardo',
-      complete: false,
-    },
-    {
-      id: 'Teste 7',
-      prevValue: '',
-      value:
-        'Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Teste 7 Leonardo',
-      complete: false,
-    },
-    {
-      id: 'Teste 8',
-      prevValue: '',
-      value:
-        'Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Teste 8 Leonardo',
-      complete: false,
-    },
-    {
-      id: 'Teste 9',
-      prevValue: '',
-      value:
-        'Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Teste 9 Leonardo',
-      complete: false,
-    },
-    {
-      id: 'Teste 10',
-      prevValue: '',
-      value:
-        'Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Teste 10 Leonardo',
-      complete: false,
-    },
-    {
-      id: 'Teste 11',
-      prevValue: '',
-      value:
-        'Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Teste 11 Leonardo',
-      complete: false,
-    },
-    {
-      id: 'Teste 12',
-      prevValue: '',
-      value:
-        'Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Teste 12 Leonardo',
-      complete: false,
-    },
-    {
-      id: 'Teste 13',
-      prevValue: '',
-      value:
-        'Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Teste 13 Leonardo',
-      complete: false,
-    },
-    {
-      id: 'Teste 14',
-      prevValue: '',
-      value:
-        'Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Teste 14 Leonardo',
-      complete: false,
-    },
-    {
-      id: 'Teste 15',
-      prevValue: '',
-      value:
-        'Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Teste 15 Leonardo',
-      complete: false,
-    },
-  ]);
+  const [todos, setTodos] = useState<TodoProps[]>([]);
   const [selectAll, setSelectAll] = useState(true);
   const [isFocused, setIsFocused] = useState(false);
 
@@ -149,6 +48,12 @@ const Dashboard: React.FC = () => {
   });
   const inputAddTodo = useRef<HTMLInputElement>(null);
   const labelRefs = useRef<HTMLLabelElement[]>([]);
+
+  useEffect(() => {
+    const data = localStorage.getItem('@TodoApp:user-data');
+
+    if (data) setTodos([...JSON.parse(data)]);
+  }, []);
 
   const handleInputFocus = useCallback(() => {
     setIsFocused(true);
@@ -181,6 +86,7 @@ const Dashboard: React.FC = () => {
       });
 
       setTodos([...newTodos]);
+      localStorage.setItem('@TodoApp:user-data', JSON.stringify([...newTodos]));
     },
     [todos],
   );
@@ -199,6 +105,10 @@ const Dashboard: React.FC = () => {
 
     setSelectAll(!selectAll);
     setTodos([...newTodosWithCompleteChange]);
+    localStorage.setItem(
+      '@TodoApp:user-data',
+      JSON.stringify([...newTodosWithCompleteChange]),
+    );
   }, [selectAll, todos]);
 
   const handleAddTodo = useCallback(
@@ -229,6 +139,10 @@ const Dashboard: React.FC = () => {
         };
 
         setTodos([...oldTodos, newTodo]);
+        localStorage.setItem(
+          '@TodoApp:user-data',
+          JSON.stringify([...oldTodos, newTodo]),
+        );
 
         if (!inputAddTodo.current)
           throw new Error('Erro ao encontrar referência do input addTodo');
@@ -264,6 +178,10 @@ const Dashboard: React.FC = () => {
         const newTodos = todos.filter((todo) => todo.id !== todoToBeRemoved.id);
 
         setTodos([...newTodos]);
+        localStorage.setItem(
+          '@TodoApp:user-data',
+          JSON.stringify([...newTodos]),
+        );
 
         return;
       }
@@ -284,6 +202,10 @@ const Dashboard: React.FC = () => {
       todosUpdated[index] = newTodo;
 
       setTodos([...todosUpdated]);
+      localStorage.setItem(
+        '@TodoApp:user-data',
+        JSON.stringify([...todosUpdated]),
+      );
     },
     [todos],
   );
@@ -293,16 +215,14 @@ const Dashboard: React.FC = () => {
       const newTodos = todos.filter((todoFilter) => todoFilter.id !== todo.id);
 
       setTodos([...newTodos]);
+      localStorage.setItem('@TodoApp:user-data', JSON.stringify([...newTodos]));
     },
     [todos],
   );
 
   return (
     <Container>
-      <InformationContainer>
-        Teste
-        {/* <div style={{ border: '2px solid green', height: '50vh' }}>Teste 2</div> */}
-      </InformationContainer>
+      <InformationContainer>Teste</InformationContainer>
 
       <MainContainer>
         <Header>
@@ -310,8 +230,6 @@ const Dashboard: React.FC = () => {
         </Header>
 
         <Main>
-          {/* <MainTitle>todo list</MainTitle> */}
-
           <InputContainer
             isErrored={addTodoError.isError}
             isFocused={isFocused}

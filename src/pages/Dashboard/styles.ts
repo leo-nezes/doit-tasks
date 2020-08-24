@@ -56,6 +56,7 @@ export const Main = styled.main`
   flex-direction: column;
   align-items: center;
   height: 503px;
+  width: 80%;
   max-width: 828px;
   margin: 16px 0;
   padding: 16px 16px;
