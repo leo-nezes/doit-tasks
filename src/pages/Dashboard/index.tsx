@@ -4,6 +4,7 @@ import React, {
   useCallback,
   useEffect,
   RefObject,
+  KeyboardEvent,
 } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import * as Yup from 'yup';
@@ -220,6 +221,29 @@ const Dashboard: React.FC = () => {
     [todos],
   );
 
+  const handleAddWithKeyCode = useCallback(
+    (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.keyCode === 13) {
+        handleAddTodo(inputAddTodo);
+      }
+    },
+    [handleAddTodo],
+  );
+
+  const handleEditWithKeyCode = useCallback(
+    (
+      event: KeyboardEvent<HTMLLabelElement>,
+      label: HTMLLabelElement,
+      index: number,
+    ) => {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        handleEditTodo(label, index);
+      }
+    },
+    [handleEditTodo],
+  );
+
   return (
     <Container>
       <InformationContainer>Teste</InformationContainer>
@@ -250,6 +274,7 @@ const Dashboard: React.FC = () => {
               placeholder="Add your todo on a list"
               onFocus={handleInputFocus}
               onBlur={handleInputBlur}
+              onKeyPress={(event) => handleAddWithKeyCode(event)}
             />
 
             <button onClick={() => handleAddTodo(inputAddTodo)} type="button">
@@ -284,6 +309,13 @@ const Dashboard: React.FC = () => {
                     }
                     onBlur={() =>
                       handleEditTodo(labelRefs.current[index], index)
+                    }
+                    onKeyDown={(event) =>
+                      handleEditWithKeyCode(
+                        event,
+                        labelRefs.current[index],
+                        index,
+                      )
                     }
                   >
                     {todo.value}

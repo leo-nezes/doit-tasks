@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { shade, transparentize } from 'polished';
+import { shade, tint, transparentize } from 'polished';
 
 import ScrollArea from 'react-scrollbar';
 
@@ -21,8 +21,6 @@ export const Container = styled.div`
 `;
 
 export const InformationContainer = styled.aside`
-  /* border: 2px solid red; */
-
   width: 250px;
   height: 95vh;
   border-radius: 5px;
@@ -107,7 +105,7 @@ export const InputContainer = styled.div<IInputContainerProps>`
       width: 25px;
       height: 25px;
 
-      transition: color 1s;
+      transition: color 0.5s;
 
       ${(props) =>
         props.isErrored
@@ -123,7 +121,7 @@ export const InputContainer = styled.div<IInputContainerProps>`
       ${(props) =>
         props.isErrored
           ? css`
-              color: ${shade(0.5, '#fa4353')};
+              color: ${tint(0.5, '#fa4353')};
             `
           : css`
               color: ${shade(0.5, '#666360')};
@@ -168,46 +166,56 @@ export const TodoListContainer = styled(ScrollArea)`
 
   width: 100%;
   height: 100%;
+  padding: 16px;
   border-radius: 16px;
 `;
 
 export const TodoList = styled.div<ITodoListProps>`
-  /* border: 2px solid green; */
-
   display: flex;
   align-items: center;
 
   width: 100%;
   height: 50px;
 
-  button {
+  button:first-child {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 10px;
     border: 0;
-    margin: 0 16px;
-  }
 
-  svg {
-    ${(props) =>
-      props.isComplete
-        ? css`
-            color: #4bb543;
-          `
-        : css`
-            color: #666360;
-          `}
+    svg {
+      width: 25px;
+      height: 25px;
 
-    width: 25px;
-    height: 25px;
+      transition: color 0.5s;
+
+      ${(props) =>
+        props.isComplete
+          ? css`
+              color: #4bb543;
+            `
+          : css`
+              color: #666360;
+            `}
+    }
+
+    svg:hover {
+      ${(props) =>
+        props.isComplete
+          ? css`
+              color: ${tint(0.5, '#4bb543')};
+            `
+          : css`
+              color: ${shade(0.5, '#666360')};
+            `}
+    }
   }
 
   label {
     white-space: nowrap;
     overflow: hidden;
     flex: 1;
-    /* max-width: 400px; */
+    margin: 0 10px;
 
     background: transparent;
     color: #666360;
@@ -221,11 +229,24 @@ export const TodoList = styled.div<ITodoListProps>`
       `}
   }
 
-  button:last-child > svg {
-    color: #fa4353;
+  button:last-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
 
-    width: 25px;
-    height: 25px;
+    svg {
+      color: #fa4353;
+
+      width: 25px;
+      height: 25px;
+
+      transition: color 0.5s;
+    }
+
+    svg:hover {
+      color: ${tint(0.5, '#fa4353')};
+    }
   }
 `;
 
