@@ -16,10 +16,13 @@ import {
   FiCheckCircle,
   FiMinusCircle,
 } from 'react-icons/fi';
+import { VictoryPie, VictoryLabel } from 'victory';
 
 import {
   Container,
   InformationContainer,
+  GraphicContainer,
+  InformationSession,
   Header,
   MainContainer,
   Main,
@@ -41,6 +44,13 @@ const Dashboard: React.FC = () => {
   const [todos, setTodos] = useState<TodoProps[]>([]);
   const [selectAll, setSelectAll] = useState(true);
   const [isFocused, setIsFocused] = useState(false);
+  const [graphicData, setGraphicData] = useState({
+    completeQuantity: 0,
+    completePercent: 0,
+    incompleteQuantity: 0,
+    incompletePercent: 0,
+    total: 0,
+  });
 
   const [addTodoError, setAddTodoError] = useState({
     isError: false,
@@ -246,7 +256,39 @@ const Dashboard: React.FC = () => {
 
   return (
     <Container>
-      <InformationContainer>Teste</InformationContainer>
+      <InformationContainer>
+        <GraphicContainer>
+          <VictoryPie
+            colorScale={['#0bd3de', '#666360']}
+            labelRadius={90}
+            innerRadius={30}
+            height={250}
+            width={250}
+            style={{ labels: { fontSize: 20, fill: '#666360' } }}
+            data={[
+              { x: '50%', y: 25 },
+              { x: '50%', y: 75 },
+            ]}
+          />
+
+          <InformationSession>
+            <ul>
+              <li>
+                <FiCircle />
+                Complete: {graphicData.completeQuantity}
+              </li>
+              <li>
+                <FiCircle />
+                Incomplete: {graphicData.incompleteQuantity}
+              </li>
+              <li>
+                <FiCircle />
+                Total: {graphicData.total}
+              </li>
+            </ul>
+          </InformationSession>
+        </GraphicContainer>
+      </InformationContainer>
 
       <MainContainer>
         <Header>

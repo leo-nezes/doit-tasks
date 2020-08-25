@@ -23,8 +23,46 @@ export const Container = styled.div`
 export const InformationContainer = styled.aside`
   width: 250px;
   height: 95vh;
+  padding: 16px;
   border-radius: 5px;
   background: #fff;
+`;
+
+export const GraphicContainer = styled.div``;
+
+export const InformationSession = styled.div`
+  display: flex;
+  flex: 1;
+  margin-top: -25px;
+  /* padding: 0 16px; */
+  color: #666360;
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    li > svg {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      margin: 0 10px;
+    }
+
+    li:first-child > svg {
+      color: #0bd3de;
+      background: #0bd3de;
+    }
+
+    li:nth-child(2) > svg {
+      color: #666360;
+      background: #666360;
+    }
+
+    li:last-child > svg {
+      color: #000;
+    }
+  }
 `;
 
 export const MainContainer = styled.section`
