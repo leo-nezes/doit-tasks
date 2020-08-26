@@ -16,13 +16,14 @@ import {
   FiCheckCircle,
   FiMinusCircle,
 } from 'react-icons/fi';
-import { VictoryPie, VictoryLabel } from 'victory';
+import { VictoryPie } from 'victory';
 
 import {
   Container,
   InformationContainer,
   GraphicContainer,
   InformationSession,
+  MessageContainer,
   Header,
   MainContainer,
   Main,
@@ -46,9 +47,9 @@ const Dashboard: React.FC = () => {
   const [isFocused, setIsFocused] = useState(false);
   const [graphicData, setGraphicData] = useState({
     completeQuantity: 0,
-    completePercent: 0,
+    completePercent: 0.0,
     incompleteQuantity: 0,
-    incompletePercent: 0,
+    incompletePercent: 0.0,
     total: 0,
   });
 
@@ -156,7 +157,7 @@ const Dashboard: React.FC = () => {
         );
 
         if (!inputAddTodo.current)
-          throw new Error('Erro ao encontrar referência do input addTodo');
+          throw new Error('Error to find reference of input addTodo');
 
         inputAddTodo.current.value = '';
 
@@ -233,7 +234,7 @@ const Dashboard: React.FC = () => {
 
   const handleAddWithKeyCode = useCallback(
     (event: KeyboardEvent<HTMLInputElement>) => {
-      if (event.keyCode === 13) {
+      if (event.key === 'Enter') {
         handleAddTodo(inputAddTodo);
       }
     },
@@ -254,40 +255,83 @@ const Dashboard: React.FC = () => {
     [handleEditTodo],
   );
 
+  useEffect(() => {
+    const newTotal = todos.length;
+    let newCompleteQuantity = 0;
+    let newCompletePercent = 0.0;
+    let newIncompleteQuantity = 0;
+    let newIncompletePercent = 0.0;
+
+    todos.forEach((todo) => {
+      if (todo.complete) {
+        newCompleteQuantity += 1;
+        newCompletePercent = (newTotal / newCompleteQuantity) * 100;
+      } else {
+        newIncompleteQuantity += 1;
+        newIncompletePercent = (newTotal / newIncompleteQuantity) * 100;
+      }
+    });
+
+    const newGraphicData = {
+      completeQuantity: newCompleteQuantity,
+      completePercent: newCompletePercent,
+      incompleteQuantity: newIncompleteQuantity,
+      incompletePercent: newIncompletePercent,
+      total: newTotal,
+    };
+
+    setGraphicData(newGraphicData);
+  }, [todos]);
+
   return (
     <Container>
       <InformationContainer>
-        <GraphicContainer>
-          <VictoryPie
-            colorScale={['#0bd3de', '#666360']}
-            labelRadius={90}
-            innerRadius={30}
-            height={250}
-            width={250}
-            style={{ labels: { fontSize: 20, fill: '#666360' } }}
-            data={[
-              { x: '50%', y: 25 },
-              { x: '50%', y: 75 },
-            ]}
-          />
+        {todos.length ? (
+          <GraphicContainer>
+            <VictoryPie
+              colorScale={['#0bd3de', '#666360']}
+              labelRadius={90}
+              innerRadius={30}
+              height={250}
+              width={250}
+              style={{ labels: { fontSize: 16, fill: '#666360' } }}
+              data={[
+                {
+                  x: `${graphicData.completePercent}%`,
+                  y: graphicData.completePercent,
+                },
+                {
+                  x: `${graphicData.incompletePercent}%`,
+                  y: graphicData.incompletePercent,
+                },
+              ]}
+            />
 
-          <InformationSession>
-            <ul>
-              <li>
-                <FiCircle />
-                Complete: {graphicData.completeQuantity}
-              </li>
-              <li>
-                <FiCircle />
-                Incomplete: {graphicData.incompleteQuantity}
-              </li>
-              <li>
-                <FiCircle />
-                Total: {graphicData.total}
-              </li>
-            </ul>
-          </InformationSession>
-        </GraphicContainer>
+            <InformationSession>
+              <ul>
+                <li>
+                  <FiCircle />
+                  Complete: {graphicData.completeQuantity}
+                </li>
+                <li>
+                  <FiCircle />
+                  Incomplete: {graphicData.incompleteQuantity}
+                </li>
+                <li>
+                  <FiCircle />
+                  Total: {graphicData.total}
+                </li>
+              </ul>
+            </InformationSession>
+          </GraphicContainer>
+        ) : (
+          <MessageContainer>
+            <h3>Attention</h3>
+            <p>
+              Add todos in the list beside to show a graphic of your progress{' '}
+            </p>
+          </MessageContainer>
+        )}
       </InformationContainer>
 
       <MainContainer>

@@ -33,8 +33,7 @@ export const GraphicContainer = styled.div``;
 export const InformationSession = styled.div`
   display: flex;
   flex: 1;
-  margin-top: -25px;
-  /* padding: 0 16px; */
+  margin-top: -10px;
   color: #666360;
 
   ul {
@@ -63,6 +62,10 @@ export const InformationSession = styled.div`
       color: #000;
     }
   }
+`;
+
+export const MessageContainer = styled.div`
+  color: #000;
 `;
 
 export const MainContainer = styled.section`
