@@ -47,9 +47,9 @@ const Dashboard: React.FC = () => {
   const [isFocused, setIsFocused] = useState(false);
   const [graphicData, setGraphicData] = useState({
     completeQuantity: 0,
-    completePercent: 0.0,
+    completePercent: 0,
     incompleteQuantity: 0,
-    incompletePercent: 0.0,
+    incompletePercent: 0,
     total: 0,
   });
 
@@ -258,25 +258,34 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     const newTotal = todos.length;
     let newCompleteQuantity = 0;
-    let newCompletePercent = 0.0;
+    let newCompletePercent = '';
     let newIncompleteQuantity = 0;
-    let newIncompletePercent = 0.0;
+    let newIncompletePercent = '';
 
     todos.forEach((todo) => {
       if (todo.complete) {
         newCompleteQuantity += 1;
-        newCompletePercent = (newTotal / newCompleteQuantity) * 100;
+        const result = (newCompleteQuantity / newTotal) * 100;
+        newCompletePercent = Intl.NumberFormat('en-us', {
+          maximumFractionDigits: 1,
+        }).format(result);
       } else {
         newIncompleteQuantity += 1;
-        newIncompletePercent = (newTotal / newIncompleteQuantity) * 100;
+        const result = (newIncompleteQuantity / newTotal) * 100;
+        newIncompletePercent = Intl.NumberFormat('en-us', {
+          maximumFractionDigits: 1,
+        }).format(result);
       }
     });
 
     const newGraphicData = {
       completeQuantity: newCompleteQuantity,
-      completePercent: newCompletePercent,
+      completePercent:
+        newCompletePercent === '' ? 0 : parseFloat(newCompletePercent),
       incompleteQuantity: newIncompleteQuantity,
-      incompletePercent: newIncompletePercent,
+      incompletePercent:
+        newIncompletePercent === '' ? 0 : parseFloat(newIncompletePercent),
+
       total: newTotal,
     };
 
@@ -290,7 +299,7 @@ const Dashboard: React.FC = () => {
           <GraphicContainer>
             <VictoryPie
               colorScale={['#0bd3de', '#666360']}
-              labelRadius={90}
+              labelRadius={85}
               innerRadius={30}
               height={250}
               width={250}
