@@ -65,7 +65,7 @@ export const InformationSession = styled.div`
 `;
 
 export const MessageContainer = styled.div`
-  color: #000;
+  color: #666360;
 `;
 
 export const MainContainer = styled.section`

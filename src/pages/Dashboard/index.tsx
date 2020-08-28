@@ -345,7 +345,7 @@ const Dashboard: React.FC = () => {
 
       <MainContainer>
         <Header>
-          <h1>TODO App</h1>
+          <h1>Do it Tasks</h1>
         </Header>
 
         <Main>
