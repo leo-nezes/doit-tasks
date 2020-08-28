@@ -428,7 +428,7 @@ const Dashboard: React.FC = () => {
         <Footer>
           <span>
             Created by{' '}
-            <a href="https://github.com/leo-nezes/todo-app">leo.nezes</a>
+            <a href="https://github.com/leo-nezes/doit-tasks">leo.nezes</a>
           </span>
         </Footer>
       </MainContainer>
