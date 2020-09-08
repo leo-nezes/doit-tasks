@@ -398,6 +398,7 @@ const Dashboard: React.FC = () => {
 
                   <label
                     contentEditable="true"
+                    spellCheck="false"
                     suppressContentEditableWarning={true}
                     ref={(el) =>
                       (labelRefs.current[index] = el as HTMLLabelElement)
