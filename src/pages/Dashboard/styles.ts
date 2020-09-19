@@ -15,6 +15,7 @@ interface IInputContainerProps {
 
 export const Container = styled.div`
   height: 100vh;
+  width: 100vw;
 
   display: flex;
   padding: 16px;
@@ -26,6 +27,10 @@ export const InformationContainer = styled.aside`
   padding: 16px;
   border-radius: 5px;
   background: #fff;
+
+  @media (max-width: 320px) {
+    display: none;
+  }
 `;
 
 export const GraphicContainer = styled.div``;
@@ -77,6 +82,11 @@ export const MainContainer = styled.section`
   padding: 16px;
 
   background: #f0f0f2;
+
+  @media (max-width: 320px) {
+    width: 100vw;
+    padding: 0;
+  }
 `;
 
 export const Header = styled.header`
@@ -86,8 +96,16 @@ export const Header = styled.header`
   width: 80%;
   height: 80px;
 
+  font-size: 45px;
   color: #666360;
-  font-size: 35px;
+
+  @media (max-width: 320px) {
+    font-size: 25px;
+
+    width: 100%;
+    height: 50px;
+    margin-bottom: 8px;
+  }
 `;
 
 export const Main = styled.main`
@@ -98,19 +116,26 @@ export const Main = styled.main`
   width: 80%;
   max-width: 828px;
   margin: 16px 0;
-  padding: 16px 16px;
+  padding: 16px;
 
   background: #fff;
   border-radius: 20px;
   box-shadow: 0px 11px 20px 0px rgba(0, 0, 0, 0.5);
+
+  @media (max-width: 320px) {
+    width: 100%;
+    height: 490px;
+
+    margin: 0 0 16px 0;
+  }
 `;
 
-export const MainTitle = styled.h1`
-  color: #000;
-  font-size: 45px;
+// export const MainTitle = styled.h1`
+//   color: #000;
+//   font-size: 45px;
 
-  padding: 10px 16px;
-`;
+//   padding: 10px 16px;
+// `;
 
 export const InputContainer = styled.div<IInputContainerProps>`
   background: #f0f0f2;
@@ -122,6 +147,11 @@ export const InputContainer = styled.div<IInputContainerProps>`
   width: 100%;
   margin-bottom: 10px;
   padding: 16px;
+
+  @media (max-width: 320px) {
+    width: 252px;
+    padding: 8px;
+  }
 
   ${(props) =>
     props.isErrored
@@ -156,6 +186,11 @@ export const InputContainer = styled.div<IInputContainerProps>`
           : css`
               color: #666360;
             `}
+
+      @media (max-width: 320px) {
+        width: 20px;
+        height: 20px;
+      }
     }
 
     svg:hover {
@@ -171,7 +206,7 @@ export const InputContainer = styled.div<IInputContainerProps>`
   }
 
   input {
-    flex: 1;
+    /* flex: 1; */
     background: transparent;
     border: 0;
     font-size: 20px;
@@ -194,6 +229,13 @@ export const InputContainer = styled.div<IInputContainerProps>`
           color: #666360;
         }
       `}
+
+    @media (max-width: 320px) {
+      width: 180px;
+      margin: 0 8px;
+
+      font-size: 16px;
+    }
   }
 `;
 
@@ -209,6 +251,11 @@ export const TodoListContainer = styled(ScrollArea)`
   height: 100%;
   padding: 16px;
   border-radius: 16px;
+
+  @media (max-width: 320px) {
+    width: 100%;
+    padding: 8px;
+  }
 `;
 
 export const TodoList = styled.div<ITodoListProps>`
@@ -238,6 +285,11 @@ export const TodoList = styled.div<ITodoListProps>`
           : css`
               color: #666360;
             `}
+
+      @media (max-width: 320px) {
+        width: 20px;
+        height: 20px;
+      }
     }
 
     svg:hover {
@@ -283,11 +335,21 @@ export const TodoList = styled.div<ITodoListProps>`
       height: 25px;
 
       transition: color 0.5s;
+
+      @media (max-width: 320px) {
+        width: 20px;
+        height: 20px;
+      }
     }
 
     svg:hover {
       color: ${tint(0.5, '#fa4353')};
     }
+  }
+
+  @media (max-width: 320px) {
+    height: 40px;
+    font-size: 16px;
   }
 `;
 

@@ -15,4 +15,4 @@ Tecnoligias utilizadas:
 - Victory
 - Yup
 - Polished
-- Styled-components
+- Styled components
