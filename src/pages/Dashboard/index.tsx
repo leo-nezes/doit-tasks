@@ -25,6 +25,7 @@ import {
   InformationSession,
   MessageContainer,
   Header,
+  Menu,
   MainContainer,
   Main,
   TodoListContainer,
@@ -347,6 +348,12 @@ const Dashboard: React.FC = () => {
         <Header>
           <h1>Do it Tasks</h1>
         </Header>
+
+        <Menu>
+          <button>Tasks</button>
+          <span></span>
+          <button>Graphic</button>
+        </Menu>
 
         <Main>
           <InputContainer

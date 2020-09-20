@@ -19,6 +19,10 @@ export const Container = styled.div`
 
   display: flex;
   padding: 16px;
+
+  @media (max-width: 320px) {
+    position: relative;
+  }
 `;
 
 export const InformationContainer = styled.aside`
@@ -29,6 +33,7 @@ export const InformationContainer = styled.aside`
   background: #fff;
 
   @media (max-width: 320px) {
+    position: absolute;
     display: none;
   }
 `;
@@ -104,7 +109,32 @@ export const Header = styled.header`
 
     width: 100%;
     height: 50px;
+  }
+`;
+
+export const Menu = styled.div`
+  display: none;
+
+  @media (max-width: 320px) {
+    display: flex;
+    width: 100%;
+    height: 25px;
     margin-bottom: 8px;
+    justify-content: center;
+
+    span {
+      margin: 5px 8px;
+
+      border: 1px solid #666360;
+      height: 15px;
+      width: 1px;
+    }
+
+    button {
+      color: #666360;
+      outline: none;
+      border: none;
+    }
   }
 `;
 
@@ -206,7 +236,7 @@ export const InputContainer = styled.div<IInputContainerProps>`
   }
 
   input {
-    /* flex: 1; */
+    flex: 1;
     background: transparent;
     border: 0;
     font-size: 20px;
