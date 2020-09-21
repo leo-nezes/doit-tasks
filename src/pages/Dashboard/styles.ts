@@ -3,6 +3,10 @@ import { shade, tint, transparentize } from 'polished';
 
 import ScrollArea from 'react-scrollbar';
 
+interface IInformationMainProps {
+  contentVisibility: boolean;
+}
+
 interface ITodoListProps {
   isComplete: boolean;
   index: number;
@@ -21,20 +25,33 @@ export const Container = styled.div`
   padding: 16px;
 
   @media (max-width: 320px) {
-    position: relative;
+    /* position: relative; */
   }
 `;
 
-export const InformationContainer = styled.aside`
+export const InformationContainer = styled.aside<IInformationMainProps>`
   width: 250px;
-  height: 95vh;
+  height: 50px;
   padding: 16px;
   border-radius: 5px;
   background: #fff;
 
   @media (max-width: 320px) {
     position: absolute;
-    display: none;
+    z-index: 1;
+    top: 98px;
+    height: 459px;
+    width: 100%;
+    max-width: 288px;
+    padding: 16px;
+    border-radius: 20px;
+
+    ${(props) =>
+      !props.contentVisibility
+        ? css`
+            display: none;
+          `
+        : ''}
   }
 `;
 
@@ -138,7 +155,7 @@ export const Menu = styled.div`
   }
 `;
 
-export const Main = styled.main`
+export const Main = styled.main<IInformationMainProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -155,6 +172,13 @@ export const Main = styled.main`
   @media (max-width: 320px) {
     width: 100%;
     height: 490px;
+
+    ${(props) =>
+      !props.contentVisibility
+        ? css`
+            display: none;
+          `
+        : ''}
 
     margin: 0 0 16px 0;
   }

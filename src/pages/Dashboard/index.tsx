@@ -46,6 +46,7 @@ const Dashboard: React.FC = () => {
   const [todos, setTodos] = useState<TodoProps[]>([]);
   const [selectAll, setSelectAll] = useState(true);
   const [isFocused, setIsFocused] = useState(false);
+  const [mainContentVisibility, setMainContentVisibility] = useState(true);
   const [graphicData, setGraphicData] = useState({
     completeQuantity: 0,
     completePercent: 0,
@@ -256,6 +257,10 @@ const Dashboard: React.FC = () => {
     [handleEditTodo],
   );
 
+  const handleChangeVisibility = useCallback(() => {
+    setMainContentVisibility(!mainContentVisibility);
+  }, [mainContentVisibility]);
+
   useEffect(() => {
     const newTotal = todos.length;
     let newCompleteQuantity = 0;
@@ -295,7 +300,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <Container>
-      <InformationContainer>
+      <InformationContainer contentVisibility={!mainContentVisibility}>
         {todos.length ? (
           <GraphicContainer>
             <VictoryPie
@@ -350,12 +355,12 @@ const Dashboard: React.FC = () => {
         </Header>
 
         <Menu>
-          <button>Tasks</button>
+          <button onClick={handleChangeVisibility}>Tasks</button>
           <span></span>
-          <button>Graphic</button>
+          <button onClick={handleChangeVisibility}>Graphic</button>
         </Menu>
 
-        <Main>
+        <Main contentVisibility={mainContentVisibility}>
           <InputContainer
             isErrored={addTodoError.isError}
             isFocused={isFocused}
