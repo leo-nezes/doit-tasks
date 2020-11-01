@@ -15,6 +15,7 @@ import {
   FiPlusCircle,
   FiCheckCircle,
   FiMinusCircle,
+  FiX,
 } from 'react-icons/fi';
 import { VictoryPie } from 'victory';
 
@@ -43,10 +44,13 @@ interface TodoProps {
 }
 
 const Dashboard: React.FC = () => {
-  const [todos, setTodos] = useState<TodoProps[]>([]);
+  const [todos, setTodos] = useState<TodoProps[]>([
+    { id: 'string', prevValue: 'string', value: 'string123', complete: false },
+  ]);
   const [selectAll, setSelectAll] = useState(true);
   const [isFocused, setIsFocused] = useState(false);
-  const [mainContentVisibility, setMainContentVisibility] = useState(true);
+  // const [mainContentVisibility, setMainContentVisibility] = useState(true);
+  const [showInformationBoard, setShowInformationBoard] = useState(false);
   const [graphicData, setGraphicData] = useState({
     completeQuantity: 0,
     completePercent: 0,
@@ -258,8 +262,8 @@ const Dashboard: React.FC = () => {
   );
 
   const handleChangeVisibility = useCallback(() => {
-    setMainContentVisibility(!mainContentVisibility);
-  }, [mainContentVisibility]);
+    setShowInformationBoard(!showInformationBoard);
+  }, [showInformationBoard]);
 
   useEffect(() => {
     const newTotal = todos.length;
@@ -300,7 +304,11 @@ const Dashboard: React.FC = () => {
 
   return (
     <Container>
-      <InformationContainer contentVisibility={!mainContentVisibility}>
+      <InformationContainer showInformationBoard={showInformationBoard}>
+        <button onClick={handleChangeVisibility}>
+          <FiX />
+        </button>
+
         {todos.length ? (
           <GraphicContainer>
             <VictoryPie
@@ -355,12 +363,12 @@ const Dashboard: React.FC = () => {
         </Header>
 
         <Menu>
-          <button onClick={handleChangeVisibility}>Tasks</button>
-          <span></span>
+          {/* <button onClick={handleChangeVisibility}>Tasks</button>
+          <span></span> */}
           <button onClick={handleChangeVisibility}>Graphic</button>
         </Menu>
 
-        <Main contentVisibility={mainContentVisibility}>
+        <Main>
           <InputContainer
             isErrored={addTodoError.isError}
             isFocused={isFocused}

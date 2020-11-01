@@ -4,7 +4,7 @@ import { shade, tint, transparentize } from 'polished';
 import ScrollArea from 'react-scrollbar';
 
 interface IInformationMainProps {
-  contentVisibility: boolean;
+  showInformationBoard?: boolean;
 }
 
 interface ITodoListProps {
@@ -23,35 +23,51 @@ export const Container = styled.div`
 
   display: flex;
   padding: 16px;
-
-  @media (max-width: 320px) {
-    /* position: relative; */
-  }
 `;
 
 export const InformationContainer = styled.aside<IInformationMainProps>`
   width: 250px;
-  height: 50px;
+  height: 95vh;
   padding: 16px;
   border-radius: 5px;
   background: #fff;
 
   @media (max-width: 320px) {
     position: absolute;
-    z-index: 1;
-    top: 98px;
-    height: 459px;
-    width: 100%;
-    max-width: 288px;
-    padding: 16px;
-    border-radius: 20px;
+    z-index: 10;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+
+    background: #fff;
+
+    transition: display 2s;
+
+    button:first-child {
+      display: block;
+      border: 0;
+      background: none;
+      margin-left: auto;
+
+      height: 30px;
+      width: 30px;
+
+      svg {
+        width: 30px;
+        height: 30px;
+        color: #666360;
+      }
+    }
 
     ${(props) =>
-      !props.contentVisibility
+      props.showInformationBoard
         ? css`
-            display: none;
+            display: block;
           `
-        : ''}
+        : css`
+            display: none;
+          `}
   }
 `;
 
@@ -173,23 +189,9 @@ export const Main = styled.main<IInformationMainProps>`
     width: 100%;
     height: 490px;
 
-    ${(props) =>
-      !props.contentVisibility
-        ? css`
-            display: none;
-          `
-        : ''}
-
     margin: 0 0 16px 0;
   }
 `;
-
-// export const MainTitle = styled.h1`
-//   color: #000;
-//   font-size: 45px;
-
-//   padding: 10px 16px;
-// `;
 
 export const InputContainer = styled.div<IInputContainerProps>`
   background: #f0f0f2;
