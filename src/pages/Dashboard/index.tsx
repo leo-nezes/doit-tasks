@@ -16,6 +16,7 @@ import {
   FiCheckCircle,
   FiMinusCircle,
   FiX,
+  FiPieChart,
 } from 'react-icons/fi';
 import { VictoryPie } from 'victory';
 
@@ -45,11 +46,14 @@ interface TodoProps {
 
 const Dashboard: React.FC = () => {
   const [todos, setTodos] = useState<TodoProps[]>([
-    { id: 'string', prevValue: 'string', value: 'string123', complete: false },
+    { id: 'string1', prevValue: 'string', value: 'string123', complete: false },
+    { id: 'string2', prevValue: 'string', value: 'string123', complete: false },
+    { id: 'string3', prevValue: 'string', value: 'string123', complete: false },
+    { id: 'string4', prevValue: 'string', value: 'string123', complete: false },
+    { id: 'string5', prevValue: 'string', value: 'string123', complete: false },
   ]);
   const [selectAll, setSelectAll] = useState(true);
   const [isFocused, setIsFocused] = useState(false);
-  // const [mainContentVisibility, setMainContentVisibility] = useState(true);
   const [showInformationBoard, setShowInformationBoard] = useState(false);
   const [graphicData, setGraphicData] = useState({
     completeQuantity: 0,
@@ -362,10 +366,8 @@ const Dashboard: React.FC = () => {
           <h1>Do it Tasks</h1>
         </Header>
 
-        <Menu>
-          {/* <button onClick={handleChangeVisibility}>Tasks</button>
-          <span></span> */}
-          <button onClick={handleChangeVisibility}>Graphic</button>
+        <Menu onClick={handleChangeVisibility}>
+          <FiPieChart />
         </Menu>
 
         <Main>
@@ -402,7 +404,11 @@ const Dashboard: React.FC = () => {
           )}
 
           {todos.length > 0 && (
-            <TodoListContainer speed={0.8} horizontal={false}>
+            <TodoListContainer
+              verticalContainerStyle={{ zIndex: 1 }}
+              speed={0.8}
+              horizontal={false}
+            >
               {todos.map((todo, index) => (
                 <TodoList
                   index={index}

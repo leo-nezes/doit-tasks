@@ -37,12 +37,13 @@ export const InformationContainer = styled.aside<IInformationMainProps>`
     z-index: 10;
     width: 100vw;
     height: 100vh;
-    left: 0;
     top: 0;
 
     background: #fff;
 
-    transition: display 2s;
+    transition: right 1s ease-in;
+    -moz-transition: right 1s ease-in;
+    -webkit-transition: right 1s ease-in;
 
     button:first-child {
       display: block;
@@ -63,10 +64,10 @@ export const InformationContainer = styled.aside<IInformationMainProps>`
     ${(props) =>
       props.showInformationBoard
         ? css`
-            display: block;
+            right: 0;
           `
         : css`
-            display: none;
+            right: -350px;
           `}
   }
 `;
@@ -145,28 +146,23 @@ export const Header = styled.header`
   }
 `;
 
-export const Menu = styled.div`
+export const Menu = styled.button`
   display: none;
 
   @media (max-width: 320px) {
-    display: flex;
-    width: 100%;
-    height: 25px;
-    margin-bottom: 8px;
-    justify-content: center;
+    position: relative;
+    display: block;
+    height: 21px;
+    width: 21px;
+    border-radius: 50%;
+    margin: 0 0 8px auto;
+    color: #666360;
+    outline: none;
+    border: none;
 
-    span {
-      margin: 5px 8px;
-
-      border: 1px solid #666360;
-      height: 15px;
-      width: 1px;
-    }
-
-    button {
-      color: #666360;
-      outline: none;
-      border: none;
+    svg {
+      height: 21px;
+      width: 21px;
     }
   }
 `;
@@ -302,7 +298,6 @@ export const TodoError = styled.label`
 
 export const TodoListContainer = styled(ScrollArea)`
   background: #f0f0f2;
-
   width: 100%;
   height: 100%;
   padding: 16px;
