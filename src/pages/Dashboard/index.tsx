@@ -47,10 +47,6 @@ interface TodoProps {
 const Dashboard: React.FC = () => {
   const [todos, setTodos] = useState<TodoProps[]>([
     { id: 'string1', prevValue: 'string', value: 'string123', complete: false },
-    { id: 'string2', prevValue: 'string', value: 'string123', complete: false },
-    { id: 'string3', prevValue: 'string', value: 'string123', complete: false },
-    { id: 'string4', prevValue: 'string', value: 'string123', complete: false },
-    { id: 'string5', prevValue: 'string', value: 'string123', complete: false },
   ]);
   const [selectAll, setSelectAll] = useState(true);
   const [isFocused, setIsFocused] = useState(false);

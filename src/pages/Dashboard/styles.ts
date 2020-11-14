@@ -32,14 +32,41 @@ export const InformationContainer = styled.aside<IInformationMainProps>`
   border-radius: 5px;
   background: #fff;
 
+  button:first-child {
+    display: none;
+  }
+
+  @media (max-width: 425px) {
+    position: absolute;
+    z-index: 10;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    right: 0;
+
+    button:first-child {
+      display: block;
+      border: 0;
+      background: none;
+      margin-left: auto;
+
+      height: 30px;
+      width: 30px;
+
+      svg {
+        width: 30px;
+        height: 30px;
+        color: #666360;
+      }
+    }
+  }
+
   @media (max-width: 320px) {
     position: absolute;
     z-index: 10;
     width: 100vw;
     height: 100vh;
     top: 0;
-
-    background: #fff;
 
     transition: right 1s ease-in;
     -moz-transition: right 1s ease-in;
@@ -122,6 +149,13 @@ export const MainContainer = styled.section`
 
   background: #f0f0f2;
 
+  @media (max-width: 425px) {
+    width: 100%;
+    height: 100%;
+
+    padding: 0;
+  }
+
   @media (max-width: 320px) {
     width: 100vw;
     padding: 0;
@@ -138,6 +172,17 @@ export const Header = styled.header`
   font-size: 45px;
   color: #666360;
 
+  @media (max-width: 768px) {
+    font-size: 40px;
+
+    width: 100%;
+    height: 50px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 35px;
+  }
+
   @media (max-width: 320px) {
     font-size: 25px;
 
@@ -148,6 +193,30 @@ export const Header = styled.header`
 
 export const Menu = styled.button`
   display: none;
+
+  @media (max-width: 425px) {
+    position: relative;
+    /* display: block; */
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    right: 0;
+    margin-left: auto;
+    color: #666360;
+    outline: none;
+    border: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fff;
+
+    svg {
+      height: 25px;
+      width: 25px;
+    }
+  }
 
   @media (max-width: 320px) {
     position: relative;
@@ -181,9 +250,23 @@ export const Main = styled.main<IInformationMainProps>`
   border-radius: 20px;
   box-shadow: 0px 11px 20px 0px rgba(0, 0, 0, 0.5);
 
+  @media (max-width: 768px) {
+    width: 100%;
+    max-height: 450px;
+
+    margin: 16px 0;
+  }
+
+  @media (max-width: 425px) {
+    width: 100%;
+    max-height: 470px;
+
+    margin: 16px 0;
+  }
+
   @media (max-width: 320px) {
     width: 100%;
-    height: 490px;
+    height: 100%;
 
     margin: 0 0 16px 0;
   }
@@ -416,5 +499,9 @@ export const Footer = styled.footer`
   span > a {
     color: #666360;
     text-decoration: none;
+  }
+
+  @media (max-width: 320px) {
+    height: 20px;
   }
 `;
