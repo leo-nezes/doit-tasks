@@ -65,10 +65,12 @@ export const InformationContainer = styled.aside<IInformationMainProps>`
     position: absolute;
     z-index: 10;
     width: 100vw;
-    height: 100vh;
-    top: 0;
+    height: calc(100vh - 65px);
+    padding: 8px;
+    border-radius: 16px 16px 0 0 ;
+    top: calc(100vh - 542px);
 
-    transition: right 1s ease-in;
+    transition: right 0.5s ease-in;
     -moz-transition: right 1s ease-in;
     -webkit-transition: right 1s ease-in;
 
@@ -88,14 +90,14 @@ export const InformationContainer = styled.aside<IInformationMainProps>`
       }
     }
 
-    ${(props) =>
+    /* ${(props) =>
       props.showInformationBoard
         ? css`
             right: 0;
           `
         : css`
             right: -350px;
-          `}
+          `} */
   }
 `;
 
